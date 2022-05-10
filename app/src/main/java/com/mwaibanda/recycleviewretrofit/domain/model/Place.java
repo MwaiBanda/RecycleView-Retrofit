@@ -1,4 +1,4 @@
-package com.mwaibanda.recycleviewretrofit.model;
+package com.mwaibanda.recycleviewretrofit.domain.model;
 
 public final class Place {
     final String  country;

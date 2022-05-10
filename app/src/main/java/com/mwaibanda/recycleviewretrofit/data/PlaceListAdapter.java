@@ -9,18 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mwaibanda.recycleviewretrofit.R;
-import com.mwaibanda.recycleviewretrofit.model.Place;
+import com.mwaibanda.recycleviewretrofit.domain.model.Country;
 import com.mwaibanda.recycleviewretrofit.utils.PlaceClickListener;
 
 import java.util.Collections;
 import java.util.List;
 
 public class PlaceListAdapter extends RecyclerView.Adapter<PlaceViewHolder> {
-    List<Place> places = Collections.emptyList();
+    List<Country> places = Collections.emptyList();
     Context context;
     PlaceClickListener listener;
 
-    public PlaceListAdapter(List<Place> places, Context context, PlaceClickListener listener){
+    public PlaceListAdapter(List<Country> places, Context context, PlaceClickListener listener){
         this.places = places;
         this.context = context;
         this.listener = listener;
@@ -40,7 +40,7 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceViewHolder> {
     public void onBindViewHolder(@NonNull PlaceViewHolder holder, int position) {
             final int index = holder.getAdapterPosition();
             String country  = places.get(position).getCountry();
-        String city  = places.get(position).getCity();
+        String city  = places.get(position).getCities().get(0);
 
         holder.country.setText(country);
         holder.city.setText(city);

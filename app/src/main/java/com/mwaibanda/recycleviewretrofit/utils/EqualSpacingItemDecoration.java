@@ -7,17 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class EqualSpacingItemDecoration extends RecyclerView.ItemDecoration {
     private final int spacing;
-    private int displayMode;
+    private DisplayMode displayMode;
 
-    public static final int HORIZONTAL = 0;
-    public static final int VERTICAL = 1;
-    public static final int GRID = 2;
-
-    public EqualSpacingItemDecoration(int spacing) {
-        this(spacing, -1);
+    public enum DisplayMode {
+        HORIZONTAL, VERTICAL, GRID, NONE
     }
 
-    public EqualSpacingItemDecoration(int spacing, int displayMode) {
+    public EqualSpacingItemDecoration(int spacing) {
+        this(spacing, DisplayMode.NONE);
+    }
+
+    public EqualSpacingItemDecoration(int spacing, DisplayMode displayMode) {
         this.spacing = spacing;
         this.displayMode = displayMode;
     }
@@ -30,15 +30,13 @@ public class EqualSpacingItemDecoration extends RecyclerView.ItemDecoration {
         setSpacingForDirection(outRect, layoutManager, position, itemCount);
     }
 
-    private void setSpacingForDirection(Rect outRect,
-                                        RecyclerView.LayoutManager layoutManager,
-                                        int position,
-                                        int itemCount) {
-
-        // Resolve display mode automatically
-        if (displayMode == -1) {
-            displayMode = resolveDisplayMode(layoutManager);
-        }
+    private void setSpacingForDirection(
+            Rect outRect,
+            RecyclerView.LayoutManager layoutManager,
+            int position,
+            int itemCount
+    ) {
+        displayMode = resolveDisplayMode(layoutManager);
 
         switch (displayMode) {
             case HORIZONTAL:
@@ -65,12 +63,14 @@ public class EqualSpacingItemDecoration extends RecyclerView.ItemDecoration {
                     outRect.bottom = position / cols == rows - 1 ? spacing : 0;
                 }
                 break;
+            case NONE:
+                break;
         }
     }
 
-    private int resolveDisplayMode(RecyclerView.LayoutManager layoutManager) {
-        if (layoutManager instanceof GridLayoutManager) return GRID;
-        if (layoutManager.canScrollHorizontally()) return HORIZONTAL;
-        return VERTICAL;
+    private DisplayMode resolveDisplayMode(RecyclerView.LayoutManager layoutManager) {
+        if (layoutManager instanceof GridLayoutManager) return DisplayMode.GRID;
+        if (layoutManager.canScrollHorizontally()) return DisplayMode.HORIZONTAL;
+        return DisplayMode.VERTICAL;
     }
 }
