@@ -12,7 +12,7 @@ import com.mwaibanda.recycleviewretrofit.di.ApplicationComponent;
 import com.mwaibanda.recycleviewretrofit.di.DaggerApplicationComponent;
 import com.mwaibanda.recycleviewretrofit.domain.model.Country;
 import com.mwaibanda.recycleviewretrofit.utils.EqualSpacingItemDecoration;
-import com.mwaibanda.recycleviewretrofit.utils.PlaceClickListener;
+import com.mwaibanda.recycleviewretrofit.utils.CountryClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     MainViewModel mainViewModel;
     CountryListAdapter adapter;
     RecyclerView recyclerView;
-    PlaceClickListener listener;
+    CountryClickListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,21 +33,21 @@ public class MainActivity extends AppCompatActivity {
         ApplicationComponent applicationComponent = DaggerApplicationComponent.create();
         applicationComponent.inject(this);
 
-        List<Country> places = new ArrayList<>();
-        mainViewModel.countries().observe(this, countries -> {
-            places.clear();
-            places.addAll(countries);
+        List<Country> countries = new ArrayList<>();
+        mainViewModel.countries().observe(this, newCountries -> {
+            countries.clear();
+            countries.addAll(newCountries);
             adapter.notifyDataSetChanged();
         });
 
         recyclerView = findViewById(R.id.recyclerView);
-        listener = new PlaceClickListener() {
+        listener = new CountryClickListener() {
             @Override
             public void onClick(int index) {
-                Toast.makeText(MainActivity.this, "Clicked" + places.get(index).getCountry(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Clicked" + countries.get(index).getCountry(), Toast.LENGTH_SHORT).show();
             }
         };
-        adapter = new CountryListAdapter(places, this, listener);
+        adapter = new CountryListAdapter(countries, this, listener);
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

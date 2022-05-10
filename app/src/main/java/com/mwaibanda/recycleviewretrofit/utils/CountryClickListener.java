@@ -1,5 +1,5 @@
 package com.mwaibanda.recycleviewretrofit.utils;
 
-public interface PlaceClickListener {
+public interface CountryClickListener {
     public void onClick(int index);
 }

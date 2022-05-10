@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mwaibanda.recycleviewretrofit.R;
 import com.mwaibanda.recycleviewretrofit.domain.model.Country;
-import com.mwaibanda.recycleviewretrofit.utils.PlaceClickListener;
+import com.mwaibanda.recycleviewretrofit.utils.CountryClickListener;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,9 +18,9 @@ import java.util.List;
 public final class CountryListAdapter extends RecyclerView.Adapter<CountryViewHolder> {
     List<Country> places = Collections.emptyList();
     Context context;
-    PlaceClickListener listener;
+    CountryClickListener listener;
 
-    public CountryListAdapter(List<Country> places, Context context, PlaceClickListener listener){
+    public CountryListAdapter(List<Country> places, Context context, CountryClickListener listener){
         this.places = places;
         this.context = context;
         this.listener = listener;
