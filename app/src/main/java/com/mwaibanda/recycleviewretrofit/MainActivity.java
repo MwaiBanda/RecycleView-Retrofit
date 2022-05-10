@@ -1,7 +1,6 @@
 package com.mwaibanda.recycleviewretrofit;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import com.mwaibanda.recycleviewretrofit.data.PlaceListAdapter;
 import com.mwaibanda.recycleviewretrofit.di.ApplicationComponent;
 import com.mwaibanda.recycleviewretrofit.di.DaggerApplicationComponent;
 import com.mwaibanda.recycleviewretrofit.domain.model.Country;
-import com.mwaibanda.recycleviewretrofit.domain.model.Place;
 import com.mwaibanda.recycleviewretrofit.utils.EqualSpacingItemDecoration;
 import com.mwaibanda.recycleviewretrofit.utils.PlaceClickListener;
 
@@ -22,7 +20,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
     @Inject
     MainViewModel mainViewModel;
     PlaceListAdapter adapter;
@@ -61,22 +59,8 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
-    }
-
-    private List<Place> getPlaces() {
-        List<Place> places = new ArrayList<>();
-        places.add(new Place("USA", "Schererville"));
-        places.add(new Place("Zambia", "Lusaka"));
-        places.add(new Place("USA", "Schererville"));
-        places.add(new Place("Zambia", "Lusaka"));
-        places.add(new Place("USA", "Schererville"));
-        places.add(new Place("Zambia", "Lusaka"));
-        places.add(new Place("USA", "Schererville"));
-        places.add(new Place("Zambia", "Lusaka"));
-        return places;
     }
 }

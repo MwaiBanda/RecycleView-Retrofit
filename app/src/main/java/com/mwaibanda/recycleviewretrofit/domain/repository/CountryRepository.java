@@ -6,7 +6,6 @@ import com.mwaibanda.recycleviewretrofit.domain.model.Country;
 import java.util.List;
 
 
-
 public interface CountryRepository {
     void fetchCountries(FetchResult completion);
     interface FetchResult {
