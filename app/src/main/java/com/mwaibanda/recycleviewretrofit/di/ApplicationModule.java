@@ -8,7 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class ApplicationModule {
+public final class ApplicationModule {
    Application application;
 
    public ApplicationModule(Application application) {

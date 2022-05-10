@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mwaibanda.recycleviewretrofit.R;
 
-public class PlaceViewHolder extends RecyclerView.ViewHolder {
+public final class CountryViewHolder extends RecyclerView.ViewHolder {
     TextView country;
     TextView city;
     View view;
 
-    public PlaceViewHolder(@NonNull View itemView) {
+    public CountryViewHolder(@NonNull View itemView) {
         super(itemView);
         this.country = itemView.findViewById(R.id.txtCountry);
         this.city = itemView.findViewById(R.id.txtCity);

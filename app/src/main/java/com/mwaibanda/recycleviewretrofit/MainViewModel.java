@@ -13,15 +13,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class MainViewModel extends ViewModel {
+public final class MainViewModel extends ViewModel {
     final private CountryRepository repository;
-    MutableLiveData<List<Country>> countries;
-    LiveData<List<Country>> getCountries() {
-        if (countries == null){
-            countries = new MutableLiveData<>();
+    private MutableLiveData<List<Country>> _countries;
+    LiveData<List<Country>> countries() {
+        if (_countries == null){
+            _countries = new MutableLiveData<>();
             fetchCountries();
         }
-        return countries;
+        return _countries;
     }
 
     @Inject public MainViewModel(CountryRepository repository) {
@@ -34,7 +34,7 @@ public class MainViewModel extends ViewModel {
         repository.fetchCountries(new CountryRepository.FetchResult() {
             @Override
             public void onSuccess(List<Country> countryData) {
-                countries.postValue(countryData);
+                _countries.postValue(countryData);
                 Log.d("TAG", "Success");
             }
 

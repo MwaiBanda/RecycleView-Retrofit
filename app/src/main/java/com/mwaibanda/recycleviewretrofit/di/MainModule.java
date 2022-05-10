@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class MainModule {
+public final class MainModule {
     @Provides
     @Singleton
     OkHttpClient.Builder provideOkHttp() {

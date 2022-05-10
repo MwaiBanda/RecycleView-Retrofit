@@ -15,12 +15,12 @@ import com.mwaibanda.recycleviewretrofit.utils.PlaceClickListener;
 import java.util.Collections;
 import java.util.List;
 
-public class PlaceListAdapter extends RecyclerView.Adapter<PlaceViewHolder> {
+public final class CountryListAdapter extends RecyclerView.Adapter<CountryViewHolder> {
     List<Country> places = Collections.emptyList();
     Context context;
     PlaceClickListener listener;
 
-    public PlaceListAdapter(List<Country> places, Context context, PlaceClickListener listener){
+    public CountryListAdapter(List<Country> places, Context context, PlaceClickListener listener){
         this.places = places;
         this.context = context;
         this.listener = listener;
@@ -28,16 +28,16 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceViewHolder> {
 
     @NonNull
     @Override
-    public PlaceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CountryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View cardView = inflater.inflate(R.layout.card_layout, parent, false);
-        PlaceViewHolder placeViewHolder = new PlaceViewHolder(cardView);
-        return placeViewHolder;
+        CountryViewHolder countryViewHolder = new CountryViewHolder(cardView);
+        return countryViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlaceViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CountryViewHolder holder, int position) {
             final int index = holder.getAdapterPosition();
             String country  = places.get(position).getCountry();
         String city  = places.get(position).getCities().get(0);

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mwaibanda.recycleviewretrofit.data.PlaceListAdapter;
+import com.mwaibanda.recycleviewretrofit.data.CountryListAdapter;
 import com.mwaibanda.recycleviewretrofit.di.ApplicationComponent;
 import com.mwaibanda.recycleviewretrofit.di.DaggerApplicationComponent;
 import com.mwaibanda.recycleviewretrofit.domain.model.Country;
@@ -22,7 +22,7 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity {
     @Inject
     MainViewModel mainViewModel;
-    PlaceListAdapter adapter;
+    CountryListAdapter adapter;
     RecyclerView recyclerView;
     PlaceClickListener listener;
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         applicationComponent.inject(this);
 
         List<Country> places = new ArrayList<>();
-        mainViewModel.getCountries().observe(this, countries -> {
+        mainViewModel.countries().observe(this, countries -> {
             places.clear();
             places.addAll(countries);
             adapter.notifyDataSetChanged();
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Clicked" + places.get(index).getCountry(), Toast.LENGTH_SHORT).show();
             }
         };
-        adapter = new PlaceListAdapter(places, this, listener);
+        adapter = new CountryListAdapter(places, this, listener);
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

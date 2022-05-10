@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class CountryRepositoryImpl implements CountryRepository {
+public final class CountryRepositoryImpl implements CountryRepository {
     final private CountryService service;
 
     @Inject public CountryRepositoryImpl(CountryService service) {
