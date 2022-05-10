@@ -30,7 +30,7 @@ public final class MainViewModel extends ViewModel {
     }
 
 
-    void fetchCountries() {
+    private void fetchCountries() {
         repository.fetchCountries(new CountryRepository.FetchResult() {
             @Override
             public void onSuccess(List<Country> countryData) {
