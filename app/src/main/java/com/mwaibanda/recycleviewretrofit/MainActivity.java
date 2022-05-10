@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,14 +32,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ApplicationComponent applicationComponent = DaggerApplicationComponent.create();
         applicationComponent.inject(this);
+
         List<Country> places = new ArrayList<>();
-        mainViewModel.getCountries().observe(this, new Observer<List<Country>>() {
-            @Override
-            public void onChanged(List<Country> countries) {
-                places.clear();
-                places.addAll(countries);
-                adapter.notifyDataSetChanged();
-            }
+        mainViewModel.getCountries().observe(this, countries -> {
+            places.clear();
+            places.addAll(countries);
+            adapter.notifyDataSetChanged();
         });
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -48,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(int index) {
                 Toast.makeText(MainActivity.this, "Clicked" + places.get(index).getCountry(), Toast.LENGTH_SHORT).show();
-
             }
         };
         adapter = new PlaceListAdapter(places, this, listener);
