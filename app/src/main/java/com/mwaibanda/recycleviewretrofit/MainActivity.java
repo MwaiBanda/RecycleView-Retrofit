@@ -1,7 +1,7 @@
 package com.mwaibanda.recycleviewretrofit;
 
 import android.os.Bundle;
-import android.widget.Toast;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,8 +11,8 @@ import com.mwaibanda.recycleviewretrofit.data.CountryListAdapter;
 import com.mwaibanda.recycleviewretrofit.di.ApplicationComponent;
 import com.mwaibanda.recycleviewretrofit.di.DaggerApplicationComponent;
 import com.mwaibanda.recycleviewretrofit.domain.model.Country;
-import com.mwaibanda.recycleviewretrofit.utils.EqualSpacingItemDecoration;
 import com.mwaibanda.recycleviewretrofit.utils.CountryClickListener;
+import com.mwaibanda.recycleviewretrofit.utils.EqualSpacingItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     MainViewModel mainViewModel;
     CountryListAdapter adapter;
     RecyclerView recyclerView;
-    CountryClickListener listener;
+    CountryClickListener countryClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +41,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.recyclerView);
-        listener = new CountryClickListener() {
-            @Override
-            public void onClick(int index) {
-                Toast.makeText(MainActivity.this, "Clicked" + countries.get(index).getCountry(), Toast.LENGTH_SHORT).show();
-            }
+        countryClickListener = (index) -> {
+            Log.d("MAIN_ACTIVITY", "Clicked " + countries.get(index).getCountry());
         };
-        adapter = new CountryListAdapter(countries, this, listener);
+        adapter = new CountryListAdapter(countries, this, countryClickListener);
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

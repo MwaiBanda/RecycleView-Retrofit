@@ -40,20 +40,16 @@ public final class CountryListAdapter extends RecyclerView.Adapter<CountryViewHo
     public void onBindViewHolder(@NonNull CountryViewHolder holder, int position) {
             final int index = holder.getAdapterPosition();
             String country  = places.get(position).getCountry();
-        String city  = places.get(position).getCities().get(0);
+            String city  = places.get(position).getCities().get(0);
 
-        holder.country.setText(country);
-        holder.city.setText(city);
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            holder.country.setText(country);
+            holder.city.setText(city);
+            holder.view.setOnClickListener(view -> {
                 listener.onClick(index);
-            }
-        });
+            });
     }
 
-    @Override
-    public int getItemCount() {
+    @Override public int getItemCount() {
         return places.size();
     }
 

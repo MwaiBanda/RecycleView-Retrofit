@@ -16,11 +16,8 @@ import javax.inject.Inject;
 public final class MainViewModel extends ViewModel {
     final private CountryRepository repository;
     private MutableLiveData<List<Country>> _countries;
-    LiveData<List<Country>> countries() {
-        if (_countries == null){
-            _countries = new MutableLiveData<>();
-            fetchCountries();
-        }
+    public LiveData<List<Country>> countries() {
+        if (_countries == null) _countries = new MutableLiveData<>();
         return _countries;
     }
 
